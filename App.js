@@ -46,6 +46,7 @@ export default function App() {
 
     setData([...data, newTodo]);
     setText("");
+    closeModal();
   };
   const markItemCompleted = (item) => {
     const itemIndex = data.findIndex((currItem) => currItem.id === item.id);
@@ -54,13 +55,15 @@ export default function App() {
       updateItems[itemIndex] = { ...data[itemIndex], completed: true };
       setData(updateItems);
       setIsVisible(false);
+      closeModal();
     } 
   };
 
 
   const TodoList = (props) => {
     return (
-      <TouchableOpacity
+      <View>
+        <TouchableOpacity
         onPress={() => markItemCompleted(props.item)}
         className="items-stretch"
       >
@@ -74,6 +77,7 @@ export default function App() {
           {props.item.title}
         </Text>
       </TouchableOpacity>
+      </View>
     );
   };
 
@@ -104,7 +108,7 @@ export default function App() {
                 onPress={addNewData}
                 className="min-w-full  min-h-[40px] text-black  text-center py-2  px-10 my-3"
               >
-                <Text onPress={closeModal} className="text-blue-500  text-center font-bold text-[20px]">
+                <Text  className="text-blue-500  text-center font-bold text-[20px]">
                   Add
                 </Text>
               </TouchableOpacity>
